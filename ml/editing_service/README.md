@@ -2,7 +2,54 @@
 
 This service uses the Qwen-Image-Edit model to perform targeted image editing based on text prompts and mask regions.
 
-## Hardware Requirements
+## Two Versions Available
+
+1. **`edit.py`** - Local model version (downloads full model)
+2. **`edit_api.py`** - API version (uses Hugging Face InferenceClient)
+
+## API Version (edit_api.py)
+
+### Requirements
+- **Hugging Face Token**: Required (get from https://huggingface.co/settings/tokens)
+- **Internet Connection**: Required for API calls
+- **Hardware**: Minimal - runs on any computer
+- **Storage**: < 100MB (no model download needed)
+
+### Setup
+1. Create a `.env` file in the project root:
+   ```
+   HF_TOKEN=your_huggingface_token_here
+   ```
+
+2. Install dependencies:
+   ```bash
+   pip install huggingface-hub python-dotenv
+   ```
+
+### Usage
+```bash
+python edit_api.py \
+    --original_image ../test_images/person1.jpg \
+    --mask_image ../test_images/person1_shirt_mask.png \
+    --prompt "a red leather jacket"
+```
+
+### Advantages
+- No model download required
+- Runs on any hardware
+- Fast startup time
+- Always uses latest model version
+- Minimal memory usage
+
+### Limitations
+- Requires internet connection
+- API rate limits may apply
+- May have queue times during high usage
+- Costs may apply for production use
+
+## Local Version (edit.py)
+
+### Hardware Requirements
 
 ### Recommended
 - **GPU**: NVIDIA GPU with 20+ GB VRAM (e.g., RTX 3090, RTX 4090, A100)
